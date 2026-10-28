@@ -1,0 +1,17 @@
+<escape>{
+  "name": "TRS Episode 01 - Java 21 and Ansible",
+  "build": {
+    "dockerfile": "Containerfile",
+    "context": ".."
+  },
+  "workspaceFolder": "/workspaces/trs-episode-01",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "redhat.ansible"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}</escape>

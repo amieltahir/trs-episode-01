@@ -1,0 +1,23 @@
+
+FROM mcr.microsoft.com/devcontainers/java:1-21-bookworm
+
+USER root
+
+RUN set -eux \
+    && grep -rl 'dl.yarnpkg.com/debian' /etc/apt/sources.list /etc/apt/sources.list.d 2>/dev/null \
+       | xargs -r sed -i '\|dl.yarnpkg.com/debian|d' \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ansible \
+        git \
+        openssh-client \
+        curl \
+        unzip \
+        podman \
+    && rm -rf /var/lib/apt/lists/*
+
+
+USER vscode
+
+WORKDIR /workspaces/trs-episode-01
+
