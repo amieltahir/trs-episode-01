@@ -1,0 +1,22 @@
+- name: Require an explicit image tag
+  ansible.builtin.assert:
+    that: trs_demo_api_tag | length > 0
+    fail_msg: Set TRS_IMAGE_TAG to the tag printed by scripts/build.sh
+
+- name: Run the application container
+  containers.podman.podman_container:
+    name: "{{ trs_demo_api_name }}"
+    image: "{{ trs_demo_api_image }}:{{ trs_demo_api_tag }}"
+    state: started
+    ports:
+      - "{{ trs_demo_api_host_port }}:{{ trs_demo_api_container_port }}"
+
+- name: Wait for the health endpoint
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:{{ trs_demo_api_host_port }}/actuator/health"
+    return_content: true
+  register: trs_health
+  until: trs_health.status == 200 and (trs_health.json.status | default('')) == 'UP'
+  retries: 30
+  delay: 2
+  changed_when: false

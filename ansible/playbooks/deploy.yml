@@ -1,0 +1,6 @@
+- name: Deploy TRS Demo API
+  hosts: podman_hosts
+  gather_facts: false
+  become: false
+  roles:
+    - trs_demo_api

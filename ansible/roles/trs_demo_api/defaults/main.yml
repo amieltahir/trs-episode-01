@@ -1,0 +1,5 @@
+trs_demo_api_name: trs-demo-api
+trs_demo_api_image: localhost/trs-demo-api
+trs_demo_api_tag: "{{ lookup('env', 'TRS_IMAGE_TAG') }}"
+trs_demo_api_host_port: 8082
+trs_demo_api_container_port: 8080
