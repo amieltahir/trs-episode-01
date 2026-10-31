@@ -1,3 +1,6 @@
 target/
 .write-test
 ansible/collections/
+
+# Local build metadata
+.build/
